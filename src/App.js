@@ -9,11 +9,11 @@ export function App() {
     <div className="App">
       <Header/>
         <main>
-          <BlogContent/>
+          <BlogContent random="random props"/>
         </main>
         
 
-      <Footer/>
+      <Footer year={new Date().getFullYear()}/>
     </div>
   );
 }
