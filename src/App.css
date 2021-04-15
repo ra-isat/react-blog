@@ -18,6 +18,7 @@ button {
   border: none;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
+  background-color: unset;
 }
 
 main {
@@ -28,5 +29,4 @@ main {
 h1, h2 {
   text-align: center;
 }
-
 

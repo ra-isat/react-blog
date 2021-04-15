@@ -7,16 +7,18 @@ console.log(new Component());
 export class BlogContent extends Component {
   state = {
     showBlog: true,
-    blogArr: posts,
+    blogArr: JSON.parse(localStorage.getItem('blogPosts')) || posts,
   };
 
   likePost = (pos) => {
-    const temp = this.state.blogArr;
-    temp[pos].likeCount++;
-
+    const temp = JSON.parse(JSON.stringify(this.state.blogArr))
+    temp[pos].liked = !temp[pos].liked;
+        
     this.setState({
       blogArr: temp,
     });
+
+    localStorage.setItem('blogPosts', JSON.stringify(temp))
   };
 
   toogleBlog = () => {
@@ -34,7 +36,7 @@ export class BlogContent extends Component {
           key={item.id}
           title={item.title}
           description={item.description}
-          likeCount={item.likeCount}
+          liked={item.liked}
           likePost={() => this.likePost(pos)}
         />
       );
