@@ -2,10 +2,12 @@ import "./BlogContent.css";
 import { posts } from "../../shared/projectData";
 import { BlogCards } from "./components/BlogCards";
 import { Component } from "react";
+import { AddPostForm } from "./components/AddPostForm";
 
 console.log(new Component());
 export class BlogContent extends Component {
   state = {
+    showAddForm: false,
     showBlog: true,
     blogArr: JSON.parse(localStorage.getItem("blogPosts")) || posts,
   };
@@ -46,6 +48,11 @@ export class BlogContent extends Component {
     }
   };
 
+  handleAddFormShow = () => {
+    this.setState({
+      showAddForm: true,
+    })
+  }
   render() {
     const blogPosts = this.state.blogArr.map((item, pos) => {
       return (
@@ -59,14 +66,21 @@ export class BlogContent extends Component {
         />
       );
     });
+    
     return (
       <>
+        {this.state.showAddForm ? (<AddPostForm/>)
+         : null}
+        
+
         <button onClick={this.toogleBlog}>
           {this.state.showBlog ? "Скрыть блог" : "Показать блог"}
         </button>
         {this.state.showBlog ? (
           <>
+          
             <h1>Simple Blog</h1>
+            <button onClick={this.handleAddFormShow} className="blackBtn">Новый пост</button>
             <div className="posts">{blogPosts}</div>
           </>
         ) : null}
