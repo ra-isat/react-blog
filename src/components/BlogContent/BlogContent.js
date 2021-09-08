@@ -24,7 +24,7 @@ export class BlogContent extends Component {
     localStorage.setItem("blogPosts", JSON.stringify(temp));
   };
 
-  toogleBlog = () => {
+  toggleBlog = () => {
     this.setState(({ showBlog }) => {
       return {
         showBlog: !showBlog,
@@ -53,6 +53,13 @@ export class BlogContent extends Component {
       showAddForm: true,
     })
   }
+
+  handleAddFormHide = () => {
+    this.setState({
+      showAddForm: false,
+    })
+  }
+
   render() {
     const blogPosts = this.state.blogArr.map((item, pos) => {
       return (
@@ -69,11 +76,11 @@ export class BlogContent extends Component {
     
     return (
       <>
-        {this.state.showAddForm ? (<AddPostForm/>)
+        {this.state.showAddForm ? (<AddPostForm handleAddFormHide={this.handleAddFormHide}/>)
          : null}
         
 
-        <button onClick={this.toogleBlog}>
+        <button onClick={this.toggleBlog}>
           {this.state.showBlog ? "Скрыть блог" : "Показать блог"}
         </button>
         {this.state.showBlog ? (

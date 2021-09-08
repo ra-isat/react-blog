@@ -1,20 +1,26 @@
 import './AddPostForm.css'
+import CloseIcon from '@material-ui/icons/Close';
 
-export const AddPostForm = () => {
+export const AddPostForm = ({ handleAddFormHide }) => {
     return (
       <>
         <form action="" className="addPostForm">
+          <button className="hideBtn" onClick={handleAddFormHide}>
+            <CloseIcon/>
+          </button>
+          
+          <h2>Создать пост</h2>
           <div>
-            <input type="text" name="postTitle" />
+            <input placeholder="заголовок поста" type="text" name="postTitle" />
           </div>
           <div>
-              <textarea name="postDesc"></textarea>
+              <textarea placeholder="описание поста" name="postDesc"></textarea>
           </div>
           <div>
-              <button className="blackBtn" type="button">Добавить</button>
+              <button onClick={handleAddFormHide} className="blackBtn" type="button">Добавить</button>
           </div>
         </form>
-        <div className="overlay"></div>
+        <div onClick={handleAddFormHide} className="overlay"></div>
       </>
     )
 }
